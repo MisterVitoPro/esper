@@ -1,6 +1,6 @@
-# Claude Code and Codex Plugin Marketplace
+# Esper
 
-Seven development plugins published through synchronized Claude Code and Codex catalogs: idea-to-spec elicitation interviews, multi-agent code review, queryable architecture maps, parallel plan execution, spec consolidation, vulnerability-aware dependency upgrades, and a generated codebase wiki.
+**Esper** is a Claude Code and Codex plugin marketplace. Seven development plugins published through synchronized Claude Code and Codex catalogs: idea-to-spec elicitation interviews, multi-agent code review, queryable architecture maps, parallel plan execution, spec consolidation, vulnerability-aware dependency upgrades, and a generated codebase wiki.
 
 The repository carries two synchronized catalogs:
 
@@ -15,10 +15,10 @@ Each plugin is implemented in its own repository. A catalog entry becomes instal
 
 ```bash
 # One-time: add the marketplace
-claude plugin marketplace add MisterVitoPro/qa-claude-market
+claude plugin marketplace add MisterVitoPro/esper
 
 # Then install whichever plugins you want (see per-plugin sections below)
-claude plugin install qa-swarm@mistervitopro-plugin-marketplace
+claude plugin install qa-swarm@esper
 ```
 
 ---
@@ -27,11 +27,11 @@ claude plugin install qa-swarm@mistervitopro-plugin-marketplace
 
 ```bash
 # One-time: add the marketplace
-codex plugin marketplace add MisterVitoPro/qa-claude-market
+codex plugin marketplace add MisterVitoPro/esper
 
 # Inspect available entries, then install a Codex-enabled plugin
 codex plugin list
-codex plugin add <plugin-name>@mistervitopro-plugin-marketplace
+codex plugin add <plugin-name>@esper
 ```
 
 Start a new Codex session after installing so bundled skills and tools are loaded. If a plugin includes lifecycle hooks, review and trust them with `/hooks` before expecting them to run.
@@ -40,22 +40,22 @@ Start a new Codex session after installing so bundled skills and tools are loade
 
 ## Plugins
 
-### qa-swarm  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fqa-swarm%2Fv1.5.0%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### qa-swarm  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fqa-swarm%2Fv1.5.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **A swarm of specialist agents reviews your code, then fixes the bugs test-first.**
 
-**Claude Code and Codex ready.** Version 1.5.0 ships both manifests, Codex-valid skills, host-neutral user gates, and portable bundled-role loading for native subagent dispatch.
+**Claude Code and Codex ready.** Version 1.5.1 ships both manifests, Codex-valid skills, host-neutral user gates, and portable bundled-role loading for native subagent dispatch.
 
 Six Sonnet core reviewers (security, correctness, performance, architecture, data-flow, async) run in parallel, optionally joined by up to six Haiku specialists (config/env, supply chain, type safety, state mgmt, logging, backwards-compat). Findings are deduplicated, ranked P0–P3, and corroborated across agents. The `implement` skill picks up the report and fixes issues with a 3-agent TDD loop (failing test → minimal fix → verify).
 
 ```bash
 # Claude Code
-claude plugin install qa-swarm@mistervitopro-plugin-marketplace
+claude plugin install qa-swarm@esper
 /qa-swarm:attack "audit the authentication flow for security and correctness"
 /qa-swarm:implement
 
 # Codex
-codex plugin add qa-swarm@mistervitopro-plugin-marketplace
+codex plugin add qa-swarm@esper
 $qa-swarm:attack "audit the authentication flow for security and correctness"
 $qa-swarm:implement
 ```
@@ -64,23 +64,23 @@ $qa-swarm:implement
 
 ---
 
-### code-atlas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fcode-atlas%2Fv2.3.0%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### code-atlas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fcode-atlas%2Fv2.3.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **Stops Claude Code and Codex from re-exploring your repo every session.**
 
-**Claude Code and Codex ready.** Version 2.3.0 ships both client manifests, Codex-valid skills, and a shared SessionStart hook. Codex users must review and trust the bundled hook with `/hooks` before automatic index injection begins.
+**Claude Code and Codex ready.** Version 2.3.1 ships both client manifests, Codex-valid skills, and a shared SessionStart hook. Codex users must review and trust the bundled hook with `/hooks` before automatic index injection begins.
 
 Three analyst agents scan your codebase in parallel and a graph synthesizer annotates the key modules, producing a curated architecture index (directory map, key files, tech stack, patterns, dependencies, build commands) plus a semantic dependency graph. Graph queries (dependencies, dependents, blast radius, risk filters) run deterministically through a bundled Node script. A `SessionStart` hook injects the index as context, and the map skill upserts a short marker-delimited usage block into `CLAUDE.md` / `AGENTS.md` so later sessions consult the atlas instead of grepping from scratch. Incremental updates re-scan only what changed.
 
 ```bash
 # Claude Code
-claude plugin install code-atlas@mistervitopro-plugin-marketplace
+claude plugin install code-atlas@esper
 /code-atlas:map                   # full first-time scan
 /code-atlas:update                # incremental refresh
 /code-atlas:query "what calls AuthService.login?"
 
 # Codex
-codex plugin add code-atlas@mistervitopro-plugin-marketplace
+codex plugin add code-atlas@esper
 $code-atlas:map
 $code-atlas:update
 $code-atlas:query "what calls AuthService.login?"
@@ -90,21 +90,21 @@ $code-atlas:query "what calls AuthService.login?"
 
 ---
 
-### plan-runner  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fplan-runner%2Fv1.14.0%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### plan-runner  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fplan-runner%2Fv1.16.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **Take a Markdown implementation plan, run it through a parallel agent swarm.**
 
-**Claude Code and Codex ready.** Version 1.14.0 pipelines verification off the critical path and loads bundled analyzer, developer, verifier, and aggregator roles relative to the active skill. Codex uses native subagents; Claude Code can additionally opt into Agent Teams.
+**Claude Code and Codex ready.** Version 1.16.1 pipelines verification off the critical path and loads bundled analyzer, developer, verifier, and aggregator roles relative to the active skill. Codex uses native subagents; Claude Code can additionally opt into Agent Teams.
 
 The analyzer breaks your plan into file-disjoint waves (≤6 agents per wave). Dev agents implement tasks in parallel; each wave commits, then its verifier checks acceptance criteria against a snapshot of that commit while the next wave's agents are already running -- every verdict still lands before aggregation, and `--sync-verify` restores blocking verification. The aggregator dedupes bugs and emits a `fix-plan.md` for re-runs. Per-wave git commits keep history bisectable. TDD red-green mode is on by default (`--no-tdd` to disable), with one shared full-suite run per wave for the regression diff. Large plans (over 4 waves) split into sequential phases checkpointed to `run-state.json`; `--resume` picks an interrupted run back up at the last completed wave. Claude Code can auto-detect Agent Teams (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`, v2.1.178+); other Claude sessions and Codex use native subagents. Every dispatched subagent's token usage is tallied best-effort into `manifest.json`, with explicit lower-bound coverage when the host exposes incomplete usage data. At the end it can push the branch and open or update a structured pull request through the bundled PR skill.
 
 ```bash
 # Claude Code
-claude plugin install plan-runner@mistervitopro-plugin-marketplace
+claude plugin install plan-runner@esper
 /plan-runner:run path/to/implementation-plan.md
 
 # Codex
-codex plugin add plan-runner@mistervitopro-plugin-marketplace
+codex plugin add plan-runner@esper
 $plan-runner:run path/to/implementation-plan.md
 ```
 
@@ -121,7 +121,7 @@ Pairs with the `ideas` plugin as the pipeline's front door: its interview skill 
 `adopt` reorganizes spec files in place, grouped by module (multi-module repos) or feature (single-module). `rewrite` collapses everything to one file with optional source cleanup. The surface scanner walks your code and appends stubs for undocumented agents, skills, CLIs, and configs so nothing slips through.
 
 ```bash
-claude plugin install jupiter@mistervitopro-plugin-marketplace
+claude plugin install jupiter@esper
 /jupiter:adopt          # reorganize specs in place
 /jupiter:rewrite        # collapse to single master file
 ```
@@ -130,14 +130,14 @@ claude plugin install jupiter@mistervitopro-plugin-marketplace
 
 ---
 
-### migration-runner  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fmigration-runner%2Fv0.1.0%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### migration-runner  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fmigration-runner%2Fv0.1.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **Vulnerability-aware dependency upgrade orchestrator across 7 ecosystems.**
 
 Scans for outdated packages (npm, Python, Go, Rust, Java, Kotlin, C#), queries OSV.dev for CVEs, recommends the safest-yet-most-recent target version per package, then executes wave-by-wave with build/typecheck/test verification and clean git rollback on failure. The two-step flow (`detect` then `run`) lets you review the plan before any code is touched.
 
 ```bash
-claude plugin install migration-runner@mistervitopro-plugin-marketplace
+claude plugin install migration-runner@esper
 /migration-runner:detect
 /migration-runner:run
 ```
@@ -146,14 +146,14 @@ claude plugin install migration-runner@mistervitopro-plugin-marketplace
 
 ---
 
-### llm-wiki  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fllm-wiki%2Fv0.1.0%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### llm-wiki  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fllm-wiki%2Fv0.1.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **Turns your codebase into a navigable wiki -- written for both new engineers and Claude's per-task context.**
 
 A planner decides the page set, writer agents fill one page each in parallel waves, a diagram author derives Mermaid diagrams from the dependency graph, and a synthesizer builds a session-loaded index with validated cross-links. It is the prose layer that complements code-atlas: where code-atlas is a machine-first dependency graph, llm-wiki writes the human-and-agent-readable "how and why" -- consuming the code-atlas index as ground truth when present, else self-scanning. Pure static Markdown (no embeddings), per-page `source_files` provenance, and git-blob hash-diff staleness detection that regenerates only stale pages. A `SessionStart` hook loads the index so Claude reads one page per task instead of grepping.
 
 ```bash
-claude plugin install llm-wiki@mistervitopro-plugin-marketplace
+claude plugin install llm-wiki@esper
 /code-atlas:map                   # optional but recommended -- llm-wiki reuses the graph
 /llm-wiki:generate                # build the wiki under .llm-wiki/
 /llm-wiki:update                  # incrementally refresh stale pages
@@ -163,11 +163,11 @@ claude plugin install llm-wiki@mistervitopro-plugin-marketplace
 
 ---
 
-### ideas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fideas%2Fv0.7.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### ideas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fideas%2Fv0.7.2%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **Interviews you into an audited design spec before any code gets written — then hands plan-runner its input.**
 
-**Claude Code and Codex ready.** Version 0.7.1 ships both client manifests, Codex-valid skills,
+**Claude Code and Codex ready.** Version 0.7.2 ships both client manifests, Codex-valid skills,
 host-neutral structured-question handling, and portable auditor/critic subagent loading. Choosing
 "Execute with plan-runner" at the plan completion gate now hands off instead of invoking in-session:
 it tells you to `/clear` first, then prints the exact `plan-runner:run` command to paste, so the
@@ -177,13 +177,13 @@ A scope-sized interview (S/M/L triage, batched multiple-choice waves, hard cap o
 
 ```bash
 # Claude Code
-claude plugin install ideas@mistervitopro-plugin-marketplace
+claude plugin install ideas@esper
 /ideas:interview "your rough idea here"
 /ideas:plan docs/specs/approved-spec.md
 /ideas:tickets docs/plans/approved-spec.plan.md
 
 # Codex
-codex plugin add ideas@mistervitopro-plugin-marketplace
+codex plugin add ideas@esper
 $ideas:interview "your rough idea here"
 $ideas:plan docs/specs/approved-spec.md
 $ideas:tickets docs/plans/approved-spec.plan.md

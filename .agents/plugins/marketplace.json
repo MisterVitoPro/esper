@@ -1,7 +1,7 @@
 {
-  "name": "mistervitopro-plugin-marketplace",
+  "name": "esper",
   "interface": {
-    "displayName": "MisterVitoPro Plugins"
+    "displayName": "Esper"
   },
   "plugins": [
     {
@@ -9,8 +9,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/qa-swarm.git",
-        "ref": "v1.5.0",
-        "sha": "3782261052328456ed30e6e5559134718d7f69e3"
+        "ref": "v1.5.1",
+        "sha": "180e3cde0c36d5674416ae73a86e78ee96a69f4f"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -23,8 +23,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/code-atlas.git",
-        "ref": "v2.3.0",
-        "sha": "325a41e836c1675c396df223e082fd335322dd36"
+        "ref": "v2.3.1",
+        "sha": "edacdbbf25dc8109f8cc0b2aa178a612e764d6bf"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -37,8 +37,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/plan-runner.git",
-        "ref": "v1.16.0",
-        "sha": "67e5a84522bfbf36d065786ee9a1df33b1d45688"
+        "ref": "v1.16.1",
+        "sha": "092d1d354a8b8a04e8c5cf714041fcd2dfa9b375"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -65,8 +65,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/migration-runner.git",
-        "ref": "v0.1.0",
-        "sha": "5f3bbecc21bd601bf320bd9230baaf97d6d967e3"
+        "ref": "v0.1.1",
+        "sha": "73df09d2c010f1ff64e11d595390d02ad2329c38"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -79,8 +79,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/llm-wiki.git",
-        "ref": "v0.1.0",
-        "sha": "ff3c176ae8ba9efaeafadcfddd464d2761302e5b"
+        "ref": "v0.1.1",
+        "sha": "f0c6786f030cb4919bdeb93d81c74b937d56b32d"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -93,8 +93,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/ideas.git",
-        "ref": "v0.7.0",
-        "sha": "68999e69c8fa5f9588b76bbdd09f5abfe25e55b2"
+        "ref": "v0.7.2",
+        "sha": "7dc71823ad40a1a849b46608982a6a5a4629722e"
       },
       "policy": {
         "installation": "AVAILABLE",
