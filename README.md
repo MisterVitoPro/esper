@@ -64,13 +64,13 @@ $qa-swarm:implement
 
 ---
 
-### code-atlas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fcode-atlas%2Fv2.3.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### code-atlas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fcode-atlas%2Fv2.3.2%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **Stops Claude Code and Codex from re-exploring your repo every session.**
 
-**Claude Code and Codex ready.** Version 2.3.1 ships both client manifests, Codex-valid skills, and a shared SessionStart hook. Codex users must review and trust the bundled hook with `/hooks` before automatic index injection begins.
+**Claude Code and Codex ready.** Version 2.3.2 reloads the index after `/clear` and compaction instead of only at startup, and dispatches its bundled analysts through native agent types on Claude Code while embedding the same definitions on Codex. Codex users must review and trust the bundled hook with `/hooks` before automatic index injection begins.
 
-Three analyst agents scan your codebase in parallel and a graph synthesizer annotates the key modules, producing a curated architecture index (directory map, key files, tech stack, patterns, dependencies, build commands) plus a semantic dependency graph. Graph queries (dependencies, dependents, blast radius, risk filters) run deterministically through a bundled Node script. A `SessionStart` hook injects the index as context, and the map skill upserts a short marker-delimited usage block into `CLAUDE.md` / `AGENTS.md` so later sessions consult the atlas instead of grepping from scratch. Incremental updates re-scan only what changed.
+Three analyst agents scan your codebase in parallel and a graph synthesizer annotates the key modules, producing a curated architecture index (directory map, key files, tech stack, patterns, dependencies, build commands) plus a semantic dependency graph. Graph queries (dependencies, dependents, blast radius, risk filters) run deterministically through a bundled Node script. A `SessionStart` hook injects the index as context on startup, resume, `/clear`, compaction, and forks, and both the map and update skills upsert a short marker-delimited usage block into `CLAUDE.md` / `AGENTS.md` so later sessions consult the atlas instead of grepping from scratch. Incremental updates re-scan only what changed.
 
 ```bash
 # Claude Code

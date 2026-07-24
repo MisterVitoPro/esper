@@ -23,8 +23,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/code-atlas.git",
-        "ref": "v2.3.1",
-        "sha": "edacdbbf25dc8109f8cc0b2aa178a612e764d6bf"
+        "ref": "v2.3.2",
+        "sha": "4f02921f56e5e4c6edf1775d6091e8e332343cd0"
       },
       "policy": {
         "installation": "AVAILABLE",
