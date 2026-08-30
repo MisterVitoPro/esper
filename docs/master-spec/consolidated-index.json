@@ -132,17 +132,18 @@
       "gaps_count": 14
     },
     "plan-runner": {
-      "summary": "plan-runner / parallel-execution / implementation",
+      "summary": "plan-runner / task-dag-execution / implementation",
       "source_file": "docs/master-spec/CONSOLIDATED-plan-runner.md",
       "sections": [
         {
           "anchor": "#readme",
-          "original_path": "plugins/plan-runner/README.md",
+          "original_path": "https://github.com/MisterVitoPro/plan-runner/blob/main/README.md",
           "heading": "## README",
           "line": 7,
-          "loc": 177,
+          "loc": 561,
           "topics": [
             "plan-runner",
+            "task-dag",
             "parallel-execution",
             "implementation",
             "testing",
@@ -151,7 +152,7 @@
           ]
         }
       ],
-      "gaps_count": 14
+      "gaps_count": 18
     },
     "shared": {
       "summary": "plan-runner / bugs / migration-runner",
