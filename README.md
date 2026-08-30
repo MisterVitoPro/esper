@@ -1,6 +1,6 @@
 # Esper
 
-**Esper** is a Claude Code and Codex plugin marketplace. Seven development plugins published through synchronized Claude Code and Codex catalogs: idea-to-spec elicitation interviews, multi-agent code review, queryable architecture maps, parallel plan execution, spec consolidation, vulnerability-aware dependency upgrades, and a generated codebase wiki.
+**Esper** is a Claude Code and Codex plugin marketplace. Seven development plugins published through synchronized Claude Code and Codex catalogs: idea-to-spec elicitation interviews, multi-agent code review, queryable architecture maps, task-DAG plan execution, spec consolidation, vulnerability-aware dependency upgrades, and a generated codebase wiki.
 
 The repository carries two synchronized catalogs:
 
@@ -90,13 +90,13 @@ $code-atlas:query "what calls AuthService.login?"
 
 ---
 
-### plan-runner  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fplan-runner%2Fv1.16.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### plan-runner  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fplan-runner%2Fv2.0.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
-**Take a Markdown implementation plan, run it through a parallel agent swarm.**
+**Take a Markdown implementation plan, run it as a verified task DAG of parallel agents.**
 
-**Claude Code and Codex ready.** Version 1.16.1 pipelines verification off the critical path and loads bundled analyzer, developer, verifier, and aggregator roles relative to the active skill. Codex uses native subagents; Claude Code can additionally opt into Agent Teams.
+**Claude Code and Codex ready.** Since 2.0.0 the default executor in a Git repository is a dependency-ready task DAG rather than wave barriers. Bundled analyzer, test-author, developer, verifier, integrator, and aggregator roles load relative to the active skill; Codex uses native subagents and Claude Code can additionally opt into Agent Teams.
 
-The analyzer breaks your plan into file-disjoint waves (≤6 agents per wave). Dev agents implement tasks in parallel; each wave commits, then its verifier checks acceptance criteria against a snapshot of that commit while the next wave's agents are already running -- every verdict still lands before aggregation, and `--sync-verify` restores blocking verification. The aggregator dedupes bugs and emits a `fix-plan.md` for re-runs. Per-wave git commits keep history bisectable. TDD red-green mode is on by default (`--no-tdd` to disable), with one shared full-suite run per wave for the regression diff. Large plans (over 4 waves) split into sequential phases checkpointed to `run-state.json`; `--resume` picks an interrupted run back up at the last completed wave. Claude Code can auto-detect Agent Teams (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`, v2.1.178+); other Claude sessions and Codex use native subagents. Every dispatched subagent's token usage is tallied best-effort into `manifest.json`, with explicit lower-bound coverage when the host exposes incomplete usage data. At the end it can push the branch and open or update a structured pull request through the bundled PR skill.
+The analyzer turns your plan into a task graph with stable IDs and explicit dependency edges (six concurrent tasks max, never two active tasks on the same file). Each ready task runs in its own disposable Git worktree rooted at the integration commit that satisfied its dependencies, so a fast task's children start while an unrelated slow task is still running. A task reaches the run-owned integration branch only through the central integrator, after scoped deterministic checks, an ownership-conformance diff, and independent verification; actionable findings earn exactly one evidence-backed repair attempt and an integration conflict one rebuild, after which the task is blocked with durable evidence. `run-state.json` plus an append-only `events.jsonl` make every dispatch, retry, block, and integration reconstructable, so `--resume` never redispatches an integrated task; long runs checkpoint by integration count (`phasing.max_integrations_per_phase`) with relay/stop boundaries. The aggregator dedupes bugs (P0-P3) and emits a `fix-plan.md` for re-runs. TDD red-green mode is on by default (`--no-tdd` to disable). Your active branch is never touched, and the run ends by pushing the integration branch and opening or updating a structured pull request for human review -- it never auto-merges. `--execution-mode wave` (or `execution.mode: wave` in `.plan-runner.yml`) restores the legacy file-disjoint wave executor with per-wave commits and pipelined verification, and that path is selected automatically when Git or worktrees are unavailable. Every subagent's token usage is tallied best-effort into `manifest.json`, with explicit lower-bound coverage when the host exposes incomplete usage data.
 
 ```bash
 # Claude Code
@@ -163,7 +163,7 @@ claude plugin install llm-wiki@esper
 
 ---
 
-### ideas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fideas%2Fv0.7.2%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### ideas  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fideas%2Fv0.8.0%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **Interviews you into an audited design spec before any code gets written — then hands plan-runner its input.**
 
