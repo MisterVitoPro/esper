@@ -9,8 +9,8 @@
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/qa-swarm.git",
-        "ref": "v1.5.1",
-        "sha": "180e3cde0c36d5674416ae73a86e78ee96a69f4f"
+        "ref": "v1.6.0",
+        "sha": "faabd30b957929db465b15a518be3af55376f0f2"
       },
       "policy": {
         "installation": "AVAILABLE",

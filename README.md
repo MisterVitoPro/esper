@@ -40,13 +40,13 @@ Start a new Codex session after installing so bundled skills and tools are loade
 
 ## Plugins
 
-### qa-swarm  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fqa-swarm%2Fv1.5.1%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
+### qa-swarm  ![version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FMisterVitoPro%2Fqa-swarm%2Fv1.6.0%2F.claude-plugin%2Fplugin.json&query=%24.version&label=version&prefix=v&color=blue)
 
 **A swarm of specialist agents reviews your code, then fixes the bugs test-first.**
 
-**Claude Code and Codex ready.** Version 1.5.1 ships both manifests, Codex-valid skills, host-neutral user gates, and portable bundled-role loading for native subagent dispatch.
+**Claude Code and Codex ready.** Version 1.6.0 adds a selectable model tier (`--model opus|sonnet|haiku` on both skills, forwarded through the implement handoff), moves the security, architecture, and backwards-compat reviewers to Opus by default, and maps tiers per host at dispatch time (Codex: opus -> Terra, sonnet/haiku -> Luna).
 
-Six Sonnet core reviewers (security, correctness, performance, architecture, data-flow, async) run in parallel, optionally joined by up to six Haiku specialists (config/env, supply chain, type safety, state mgmt, logging, backwards-compat). Findings are deduplicated, ranked P0–P3, and corroborated across agents. The `implement` skill picks up the report and fixes issues with a 3-agent TDD loop (failing test → minimal fix → verify).
+Six core reviewers (security, correctness, performance, architecture, data-flow, async) run in parallel -- security and architecture on Opus, the rest on Sonnet by default -- optionally joined by up to six specialists (config/env, supply chain, type safety, state mgmt, logging on Haiku; backwards-compat on Opus). Pin the whole run to one tier with `--model`. Findings are deduplicated, ranked P0–P3, and corroborated across agents. The `implement` skill picks up the report and fixes issues with a 3-agent TDD loop (failing test → minimal fix → verify).
 
 ```bash
 # Claude Code
