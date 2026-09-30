@@ -75,12 +75,12 @@
     },
     {
       "name": "ideas",
-      "description": "Claude Code and Codex idea-to-spec pipeline: turn a raw idea into an audited design spec through a token-conscious interview with scope-sized batched questions, a category-coverage elicitation floor, an existing-system baseline, and a resumable three-status ledger. A binding ledger audit and biggest-miss critic gate the EARS-based spec. After approval, the Ideas plan skill emits a plan-runner-ready flat task list with full criteria and a completion gate offering a /clear-then-paste plan-runner handoff (fresh context for the execution engine), inline or subagent execution, GitHub tickets, or stop. The Ideas tickets skill projects ready tasks to a parent issue plus linked sub-issues using the gh CLI. Not for typos, renames, or one-line fixes.",
+      "description": "Claude Code and Codex idea-to-build pipeline: turn a raw idea into an audited design spec through a token-conscious interview with scope-sized batched questions, a category-coverage elicitation floor, an existing-system baseline, and a resumable three-status ledger. A binding ledger audit and biggest-miss critic gate the EARS-based spec. After approval, the Ideas plan skill emits a plan-runner-ready flat task list with full criteria plus a script-generated bundle: a planned source skeleton, a versioned skeleton manifest, and a typed dependency graph with a self-contained per-task Graph context. A completion gate offers a /clear-then-paste plan-runner handoff (fresh context for the execution engine), inline or subagent execution, GitHub tickets, or stop. The Ideas tickets skill projects ready tasks to a parent issue plus linked sub-issues using the gh CLI. Specs, plans, and ADRs land under the project's existing docs root, auto-detected. Not for typos, renames, or one-line fixes.",
       "source": {
         "source": "url",
         "url": "https://github.com/MisterVitoPro/ideas.git",
-        "ref": "v0.8.0",
-        "sha": "c5b4e9a1af3a945eead86007d753dc966fbb6f8b"
+        "ref": "v0.9.0",
+        "sha": "10e23575eb09dcb711637cae22a3323993b0894d"
       },
       "category": "development"
     }
